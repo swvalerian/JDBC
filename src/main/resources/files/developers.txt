@@ -1,0 +1,5 @@
+1,ChiCHi,GaGa,2,3,5/
+2,Timur,Lopatin,7,4/
+3,Fedor,Bombino,11,9/
+4,August,Cesar,4,9/
+5,Cat,Murzik,3,4,5,11/

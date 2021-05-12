@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="table Developers add column" author="valerian" dbms="mysql">
+        <!--Insert XML changes objects here https://www.liquibase.org/documentation/xml_format.html-->
+        <comment>Изменение таблицы Developers = 3НФ</comment>
+        <addColumn tableName="Developers" >
+            <column name="Dev_Skill_Id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="table Developers Drop column" author="valerian" dbms="mysql">
+        <!--Insert XML changes objects here https://www.liquibase.org/documentation/xml_format.html-->
+        <comment>Изменение таблицы Developers = 3НФ</comment>
+        <dropColumn tableName="Developers" columnName="Skill_Id">
+        </dropColumn>
+    </changeSet>
+
+    <changeSet id="table Developers init column Dev_Skill_Id" author="valerian" dbms="mysql">
+        <sql>
+            UPDATE Developers SET Dev_Skill_Id = 1 WHERE Id = 1;
+            UPDATE Developers SET Dev_Skill_Id = 2 WHERE Id = 2;
+            UPDATE Developers SET Dev_Skill_Id = 3 WHERE Id = 3;
+            UPDATE Developers SET Dev_Skill_Id = 4 WHERE Id = 4;
+            UPDATE Developers SET Dev_Skill_Id = 5 WHERE Id = 5;
+            UPDATE Developers SET Dev_Skill_Id = 6 WHERE Id = 6;
+            UPDATE Developers SET Dev_Skill_Id = 7 WHERE Id = 7;
+            UPDATE Developers SET Dev_Skill_Id = 8 WHERE Id = 8;
+            UPDATE Developers SET Dev_Skill_Id = 9 WHERE Id = 9;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+<changeSet id="Create table Developers_Skills" author="Valerian">
+    <sql>
+        CREATE TABLE Developers_Skills (
+        Dev_Skill_Id INT NOT NULL AUTO_INCREMENT,
+        Skill_Id INT NOT NULL,
+        PRIMARY KEY (Dev_Skill_Id));
+    </sql>
+</changeSet>
+</databaseChangeLog>

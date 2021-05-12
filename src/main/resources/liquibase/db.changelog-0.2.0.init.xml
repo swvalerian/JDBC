@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="init-Developers" author="swvalerian">
+        <sql>
+            insert into Developers (Name, Skill_Id) values('Valeriy Panafidin',1);
+            insert into Developers (Name, Skill_Id) values('Mihail Stolipin',2);
+            insert into Developers (Name, Skill_Id) values('Jorj Michel',5);
+            insert into Developers (Name, Skill_Id) values('Erik Ramazotti',3);
+            insert into Developers (Name, Skill_Id) values('Avgust Bugakov',1);
+            insert into Developers (Name, Skill_Id) values('Cherryy Lady',6);
+            insert into Developers (Name, Skill_Id) values('Thomas Anderson',4);
+            insert into Developers (Name, Skill_Id) values('Tono Montana',5);
+            insert into Developers (Name, Skill_Id) values('Dr. Alban',2);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

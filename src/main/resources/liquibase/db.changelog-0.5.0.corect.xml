@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="AUTO_INCREMENT OFF!!! in table Developers_Skills" author="Valerian">
+        <comment> ALTER TABLE Developers_Skills AUTO_INCREMENT = false;</comment>
+        <sql>
+            SET FOREIGN_KEY_CHECKS=0;
+            alter table Developers_Skills modify column Dev_Skill_Id int(11) not null;
+            SET FOREIGN_KEY_CHECKS=1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="Valerian">
+        <comment> ALTER TABLE Drop Primary_Key</comment>
+        <sql>
+            SET FOREIGN_KEY_CHECKS=0;
+            ALTER TABLE Developers_Skills DROP PRIMARY KEY;
+            SET FOREIGN_KEY_CHECKS=1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="Add Skills more than one" author="Valerian">
+        <sql>
+            INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(1, 5);
+            INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(1, 1);
+            INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(2, 3);
+            INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(4, 6);
+            INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(4, 4);
+            INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(6, 2);
+            INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(9, 5);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
