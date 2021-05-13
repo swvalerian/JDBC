@@ -19,10 +19,12 @@ public class AppRunner {
 
         SkillRepository skillRepository = new SkillRepository();
         List<Skill> skillList = new ArrayList<>();
-        skillList.add(skillRepository.getById(2));
-        skillList.add(skillRepository.getById(4));
+        skillList.add(skillRepository.getById(1));
+        skillList.add(skillRepository.getById(5));
 
-        devRep.save(new Developer(13, "Test2", "Ahtung!!!", skillList));
+        devRep.save(new Developer(10, "Test3", "Working", skillList));
+
+        // devRep.deleteById(11l);
 
 
         // тест SkillRepo

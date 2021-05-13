@@ -9,20 +9,20 @@
         </dropColumn>
     </changeSet>
 
-    <changeSet id="Create column firstName and lastName" author="Valerian" ignore="true">
+    <changeSet id="Create column firstName and lastName" author="Valerian" ignore="false">
         <sql>
             ALTER TABLE Developers ADD COLUMN firstName varchar(25), ADD COLUMN lastName varchar(25);
         </sql>
     </changeSet>
 
-    <changeSet id="trunca" author="valerian" ignore="true">
+    <changeSet id="trunca" author="valerian" ignore="false">
         <sql>
             DELETE FROM DEVELOPERS;
             ALTER TABLE Developers DROP Name
         </sql>
     </changeSet>
 
-    <changeSet id="AUTO_INCREMENT = 0 in table Developers" author="Valerian">
+    <changeSet id="AUTO_INCREMENT = 0 -> in table Developers" author="Valerian">
         <comment> ALTER TABLE Developers AUTO_INCREMENT = 0;</comment>
         <sql>
             SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="Init column firstName and lastName" author="Valerian" ignore="false">
+    <changeSet id="Init columns firstName and lastName" author="Valerian" ignore="false">
         <sql>
             INSERT INTO Developers (firstName, lastName) values('Valeriy','Panafidin');
             INSERT INTO Developers (firstName, lastName) values('Mihail','Stolipin');
@@ -49,4 +49,30 @@
             UPDATE Skills SET Skill = "MySQL" WHERE ID = 5;
         </sql>
     </changeSet>
+
+    <changeSet id="Final" author="Valerian">
+        <comment> ALTER TABLE Developers AUTO_INCREMENT = 0;</comment>
+        <sql>
+            DELETE FROM DEVELOPERS;
+            SET FOREIGN_KEY_CHECKS=0;
+            alter table Developers AUTO_INCREMENT = 0;
+            SET FOREIGN_KEY_CHECKS=1;
+            INSERT INTO Developers (firstName, lastName) values('Valeriy','Panafidin');
+            INSERT INTO Developers (firstName, lastName) values('Mihail','Stolipin');
+            INSERT INTO Developers (firstName, lastName) values('Jorj','Michel');
+            INSERT INTO Developers (firstName, lastName) values('Erik','Ramazotti');
+            INSERT INTO Developers (firstName, lastName) values('Avgust','Bulgakov');
+            INSERT INTO Developers (firstName, lastName) values('Cherry','Lady');
+            INSERT INTO Developers (firstName, lastName) values('Thomas','Anderson');
+            INSERT INTO Developers (firstName, lastName) values('Toni','Montana');
+            INSERT INTO Developers (firstName, lastName) values('Mister','Credo');
+        </sql>
+    </changeSet>
+    <changeSet id="Final3" author="Valerian">
+        <comment> ALTER TABLE Developers AUTO_INCREMENT = 0;</comment>
+        <sql>
+            UPDATE Skills SET Skill = "JS" WHERE ID = 4;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
