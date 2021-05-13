@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillRepository {
-    // удалить потом файл, когда все переделаю
-    final private File file = new File("src\\main\\resources\\files\\skills.txt");
     // а вот и "связка" репозитория с "БД"
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     //     "jdbc:mysql://localhost:3306/?user=root"

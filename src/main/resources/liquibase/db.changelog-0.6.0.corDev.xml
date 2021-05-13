@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="Delete column Dev_Skils from Developers" author="Valerian">
+        <dropColumn tableName="Developers" columnName="Dev_Skill_Id">
+        </dropColumn>
+    </changeSet>
+
+    <changeSet id="Create column firstName and lastName" author="Valerian" ignore="true">
+        <sql>
+            ALTER TABLE Developers ADD COLUMN firstName varchar(25), ADD COLUMN lastName varchar(25);
+        </sql>
+    </changeSet>
+
+    <changeSet id="trunca" author="valerian" ignore="true">
+        <sql>
+            DELETE FROM DEVELOPERS;
+            ALTER TABLE Developers DROP Name
+        </sql>
+    </changeSet>
+
+    <changeSet id="AUTO_INCREMENT = 0 in table Developers" author="Valerian">
+        <comment> ALTER TABLE Developers AUTO_INCREMENT = 0;</comment>
+        <sql>
+            SET FOREIGN_KEY_CHECKS=0;
+            alter table Developers AUTO_INCREMENT = 0;
+            SET FOREIGN_KEY_CHECKS=1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="Init column firstName and lastName" author="Valerian" ignore="false">
+        <sql>
+            INSERT INTO Developers (firstName, lastName) values('Valeriy','Panafidin');
+            INSERT INTO Developers (firstName, lastName) values('Mihail','Stolipin');
+            INSERT INTO Developers (firstName, lastName) values('Jorj','Michel');
+            INSERT INTO Developers (firstName, lastName) values('Erik','Ramazotti');
+            INSERT INTO Developers (firstName, lastName) values('Avgust','Bulgakov');
+            INSERT INTO Developers (firstName, lastName) values('Cherry','Lady');
+            INSERT INTO Developers (firstName, lastName) values('Thomas','Anderson');
+            INSERT INTO Developers (firstName, lastName) values('Toni','Montana');
+            INSERT INTO Developers (firstName, lastName) values('Mister','Credo');
+        </sql>
+    </changeSet>
+    <changeSet id="correct column name from table skill" author="Valerian">
+        <sql>
+            UPDATE Skills SET Skill = "MySQL" WHERE ID = 5;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
