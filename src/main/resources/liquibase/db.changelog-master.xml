@@ -15,6 +15,10 @@
         <include file="src/main/resources/liquibase/db.changelog-0.4.1.init.xml"/>
         <include file="src/main/resources/liquibase/db.changelog-0.5.0.corect.xml"/>
         <include file="src/main/resources/liquibase/db.changelog-0.6.0.corDev.xml"/>
+        <include file="src/main/resources/liquibase/db.changelog-0.7.0.teamCreate.xml"/>
+        <include file="src/main/resources/liquibase/db.changelog-0.7.1.teamInit.xml"/>
+        <include file="src/main/resources/liquibase/db.changelog-0.8.0.team_Dev.xml"/>
+        <include file="src/main/resources/liquibase/db.changelog-0.8.0.team_Dev_init.xml"/>
 
 </databaseChangeLog>
 

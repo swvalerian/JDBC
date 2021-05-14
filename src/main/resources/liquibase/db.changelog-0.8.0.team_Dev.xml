@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="Create table Team_Developers" author="Valerian">
+        <sql>
+            CREATE TABLE swvalerian.Team_Developers (
+            Team_id INT NOT NULL,
+            Dev_id INT NOT NULL);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
