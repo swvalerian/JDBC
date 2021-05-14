@@ -176,7 +176,7 @@ public class JavaIODevRepImpl implements DeveloperRepository {
         try {
             connection = DriverManager.getConnection(DATABASE_URL, User, Password);
 
-            // подготовим запрос для удаления записи из таблицы
+            // подготовим запрос для удаления записи из таблицы Developers
             String SQL = "DELETE FROM Developers WHERE Id = ?;";
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setLong(1, id);
@@ -185,6 +185,7 @@ public class JavaIODevRepImpl implements DeveloperRepository {
 
             // подготовим запрос для удаления записей из таблицы Developers_Skills
             SQL = "DELETE FROM Developers_Skills WHERE Dev_Skill_id = ?;";
+
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setLong(1, id);
             // выполняем запрос

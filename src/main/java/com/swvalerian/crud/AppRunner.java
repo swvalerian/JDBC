@@ -25,6 +25,7 @@ public class AppRunner {
 
         SkillRepository skillRepository = new SkillRepository();
         List<Skill> skillList = new ArrayList<>();
+
         skillList.add(skillRepository.getById(20));
 
         devRep.update(new Developer(4,"Pasha", "Sorokin", skillList)); // работает
@@ -33,6 +34,7 @@ public class AppRunner {
         // devRep.save(new Developer(25, "Danil", "Markov", skillList)); // работает, неважно что в ID - т.к. автоинкремент! и я это учел!
         // devRep.deleteById(10l); // работает
         */
+
 
 
         // тест SkillRepo
