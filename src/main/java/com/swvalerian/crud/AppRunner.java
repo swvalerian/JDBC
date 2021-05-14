@@ -12,6 +12,12 @@ import java.util.List;
 
 public class AppRunner {
     public static void main(String[] args) throws SQLException {
+
+
+
+
+
+        /*
         // тест DevRepo
         DeveloperRepository devRep = new JavaIODevRepImpl();
         System.out.println(devRep.getAll());
@@ -19,10 +25,14 @@ public class AppRunner {
 
         SkillRepository skillRepository = new SkillRepository();
         List<Skill> skillList = new ArrayList<>();
-        skillList.add(skillRepository.getById(2));
-        skillList.add(skillRepository.getById(4));
+        skillList.add(skillRepository.getById(20));
 
-        devRep.save(new Developer(13, "Test2", "Ahtung!!!", skillList));
+        devRep.update(new Developer(4,"Pasha", "Sorokin", skillList)); // работает
+        System.out.println(devRep.getId(4l)); // работает
+
+        // devRep.save(new Developer(25, "Danil", "Markov", skillList)); // работает, неважно что в ID - т.к. автоинкремент! и я это учел!
+        // devRep.deleteById(10l); // работает
+        */
 
 
         // тест SkillRepo

@@ -3,20 +3,16 @@ package com.swvalerian.crud.repository;
 import com.swvalerian.crud.model.Developer;
 import com.swvalerian.crud.model.Skill;
 
-import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 // Developer(id, firstName, lastName, List<Skill> skills)
-
 public class JavaIODevRepImpl implements DeveloperRepository {
-    final private File file = new File("src\\main\\resources\\files\\developers.txt");
     //static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver"; // устарело. драйвер подгружается автоматом
-    static final String DATABASE_URL = "jdbc:mysql://localhost:3306/swvalerian";
-    static final String User = "root";
-    static final String Password = "QWERTgfdsa1980";
+    static private final String DATABASE_URL = "jdbc:mysql://localhost:3306/swvalerian";
+    static private final String User = "root";
+    static private final String Password = "QWERTgfdsa1980";
 
     private List<Developer> getListFFD() {
         List<Developer> devList = new ArrayList<>();
@@ -35,7 +31,7 @@ public class JavaIODevRepImpl implements DeveloperRepository {
             preparedStatement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // выполняем запрос
             ResultSet rS = preparedStatement.executeQuery();
-            int prevId = 1; // переменная нужна для сравнения ID тот же девелопер - тогда список Skill заполняем
+            int prevId = 1; // для сравнения ID, если тот же девелопер, тогда список Skill заполняем дальше
 
             while (rS.next()) {
                 List<Skill> skillList = new ArrayList<>();
@@ -80,7 +76,7 @@ public class JavaIODevRepImpl implements DeveloperRepository {
         return developer;
     }
 
-    // JDBC! - приватный метод, уменьшаем основной код
+    // JDBC! - приватный метод
     private void writeBuf(Developer d) {
         // сохраним обьект - добавим его в нашу таблицу
         Connection connection = null; // Интерфейс для соединения с менеджером драйверов БД
@@ -99,23 +95,24 @@ public class JavaIODevRepImpl implements DeveloperRepository {
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
-            // выполняем запрос
             preparedStatement.executeUpdate();
 
-            // теперь запишем соответствие скилов в таблицу developers_skills
-            Integer id = d.getId(); // получим ID девелопера
+            SQL = "SELECT last_insert_id();"; // надо узнать номер инкремента, чтоб корректно добавить ID в Dev_Skills
+            ResultSet resultSet = preparedStatement.executeQuery(SQL);
+            resultSet.next();
+            int Dev_Skill_Id = resultSet.getInt(1); // получили ID вновь добавленного девелопера
 
-            //
-            // мне показалось что тут можно использовать пакетное управление addBatch() - надо будет потом подумать над этим
-            //
+            // теперь запишем соответствие скилов в таблицу developers_skills
+            SQL = "INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(?,?);";
+            preparedStatement = connection.prepareStatement(SQL);
+
             for ( int i = 0; i < skills.size(); i++) {
-                SQL = "INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(?,?);"; // у нас автоинкремент, ID автоматом проставится
-                preparedStatement = connection.prepareStatement(SQL);
-                preparedStatement.setInt(1, id);
+                preparedStatement.setInt(1, Dev_Skill_Id);
                 preparedStatement.setInt(2, skills.get(i).getId());
-                // выполняем запрос
-                preparedStatement.executeUpdate();
+                preparedStatement.addBatch(); // пишем запросы в пакет
             }
+            preparedStatement.executeBatch(); // пакетный запуск запросов.
+
             // закроем открытые соединения
             connection.close();
             preparedStatement.close();
@@ -124,23 +121,54 @@ public class JavaIODevRepImpl implements DeveloperRepository {
         }
     }
 
-
     @Override
     public List<Developer> update(Developer developer) {
-        List<Developer> listDev = getListFFD();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
 
-        return listDev.stream().peek(s ->
-                {
-                    if (s.getId().equals(developer.getId())) {
-                        s.setFirstName(developer.getFirstName());
-                        s.setLastName(developer.getLastName());
-                    }
-                writeBuf(s); // пишем построчно в новый файл.
-                })
-                .collect(Collectors.toList());
+        try {
+            connection = DriverManager.getConnection(DATABASE_URL, User, Password);
+            // подготовим запрос для изменения записи в таблице
+            String SQL = "UPDATE Developers SET firstName=?, lastName=? WHERE Id = ?;";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, developer.getFirstName());
+            preparedStatement.setString(2, developer.getLastName());
+            preparedStatement.setInt(3, developer.getId());
+            // выполняем запрос
+            preparedStatement.executeUpdate();
+
+            // теперь нам надо изменить данные о Skills - тут по хитрому поступим.
+            // Сначало сотрем все старые данные об умениях (и неважно где они в таблице)
+            // а после добавим новые данные, в конец таблицы, тоже не важно - где они хранятся.
+            SQL = "DELETE FROM Developers_Skills WHERE Dev_Skill_id = ?;";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setLong(1, developer.getId());
+            // удаляем
+            preparedStatement.executeUpdate();
+
+            //а теперь добавим данные об умениях в таблицу Dev_Skill
+            List<Skill> skills = developer.getSkills(); // получим список
+
+            SQL = "INSERT INTO Developers_Skills (Dev_Skill_Id, Skill_Id) values(?,?);";
+            preparedStatement = connection.prepareStatement(SQL);
+
+            for ( int i = 0; i < skills.size(); i++) {
+                preparedStatement.setInt(1, developer.getId());
+                preparedStatement.setInt(2, skills.get(i).getId());
+                preparedStatement.addBatch(); // пишем запросы в пакет
+            }
+            preparedStatement.executeBatch(); // пакетный запуск запросов.
+
+            // закроем открытые соединения
+            connection.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.err.println("Ошибка работы с БД в методе DevRep.UpDate");
+        }
+        return getListFFD();
     }
 
-    @Override
+    @Override // JDBC работает!
     public void deleteById(Long id) {
         Connection connection = null; // Интерфейс для соединения с менеджером драйверов БД
         PreparedStatement preparedStatement = null; // А этот содержит методы подтверждения запросов
@@ -150,10 +178,15 @@ public class JavaIODevRepImpl implements DeveloperRepository {
 
             // подготовим запрос для удаления записи из таблицы
             String SQL = "DELETE FROM Developers WHERE Id = ?;";
-
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setLong(1, id);
+            // выполняем запрос
+            preparedStatement.executeUpdate();
 
+            // подготовим запрос для удаления записей из таблицы Developers_Skills
+            SQL = "DELETE FROM Developers_Skills WHERE Dev_Skill_id = ?;";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setLong(1, id);
             // выполняем запрос
             preparedStatement.executeUpdate();
 

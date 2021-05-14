@@ -2,19 +2,18 @@ package com.swvalerian.crud.repository;
 
 import com.swvalerian.crud.model.Skill;
 
-import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SkillRepository {
     // а вот и "связка" репозитория с "БД"
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    static private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     //     "jdbc:mysql://localhost:3306/?user=root"
-    static final String DATABASE_URL = "jdbc:mysql://localhost:3306/swvalerian";
+    static private final String DATABASE_URL = "jdbc:mysql://localhost:3306/swvalerian";
     // User $ Password
-    static final String User = "root";
-    static final String Password = "QWERTgfdsa1980";
+    static private final String User = "root";
+    static private final String Password = "QWERTgfdsa1980";
 
     // приватный метод, создание списка из файла, который повторяется по коду много раз.
     private List<Skill> getListFromDB() {
@@ -39,7 +38,7 @@ public class SkillRepository {
             preparedStatement.close();
             result.close();
         } catch (SQLException e) {
-            System.err.println("Ошибка соединения с БД");
+            System.err.println("Ошибка соединения с БД в SkillRep.GetListfromDB");
         }
         return skillList;
     }
@@ -74,7 +73,7 @@ public class SkillRepository {
             connection.close();
             preparedStatement.close();
         } catch (SQLException e) {
-            System.err.println("Ошибка соединения с БД в методе UPDATE");
+            System.err.println("Ошибка соединения с БД в методе SkillRep.UPDATE");
         }
         return getListFromDB();
     }
@@ -102,7 +101,7 @@ public class SkillRepository {
             connection.close();
             preparedStatement.close();
         } catch (SQLException e) {
-            System.err.println("Ошибка соединения с БД в методе SAVE");
+            System.err.println("Ошибка соединения с БД в методе SkillRep.SAVE");
         }
         return skills;
     }
@@ -127,7 +126,7 @@ public class SkillRepository {
             connection.close();
             preparedStatement.close();
         } catch (SQLException e) {
-            System.err.println("Ошибка соединения с БД в методе DeleteByID");
+            System.err.println("Ошибка соединения с БД в методе SkillRep.DeleteByID");
         }
     }
 }
