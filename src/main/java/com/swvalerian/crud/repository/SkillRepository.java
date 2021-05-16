@@ -7,36 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillRepository {
-    // а вот и "связка" репозитория с "БД"
-    static private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    //     "jdbc:mysql://localhost:3306/?user=root"
     static private final String DATABASE_URL = "jdbc:mysql://localhost:3306/swvalerian";
-    // User $ Password
     static private final String User = "root";
     static private final String Password = "QWERTgfdsa1980";
 
     // приватный метод, создание списка из файла, который повторяется по коду много раз.
     private List<Skill> getListFromDB() {
-        Connection connection = null; // Интерфейс для соединения с менеджером драйверов БД
-        PreparedStatement preparedStatement = null; // А этот содержит методы подтверждения запросов
         List<Skill> skillList = new ArrayList<>(); // сюда поместим список всех значений
 
-        try {
-            connection = DriverManager.getConnection(DATABASE_URL, User, Password);
-
+        try ( Connection connection = DriverManager.getConnection(DATABASE_URL, User, Password)){
             String SQL = "SELECT * FROM Skills";
             // подготовили запрос
-            preparedStatement = connection.prepareStatement(SQL);
-            // выполняем запрос
-            ResultSet result = preparedStatement.executeQuery();
+            try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+                // выполняем запрос
+                ResultSet result = preparedStatement.executeQuery();
 
-            while (result.next()) {
-                skillList.add(new Skill(result.getInt("ID"), result.getString("Skill")));
+                while (result.next()) {
+                    skillList.add(new Skill(result.getInt("ID"), result.getString("Skill")));
+                }
+                result.close();
             }
-            // закроем открытые соединения
-            connection.close();
-            preparedStatement.close();
-            result.close();
         } catch (SQLException e) {
             System.err.println("Ошибка соединения с БД в SkillRep.GetListfromDB");
         }

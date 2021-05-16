@@ -23,4 +23,9 @@
             WHERE ID > 3;
         </sql>
     </changeSet>
+    <changeSet id="correct_Skills" author="Valerian">
+        <sql>
+            UPDATE Skills SET Skill = "Delphi" WHERE ID = 1;
+        </sql>
+    </changeSet>
 </databaseChangeLog>

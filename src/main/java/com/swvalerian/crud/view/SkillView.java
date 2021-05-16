@@ -29,7 +29,7 @@ public class SkillView {
                         System.out.println("\n Успешно создали новую запись в файле!");
                         break;
                     case "get" : System.out.println("Получили следующую запись из файла: \n");
-                        sc.read(Integer.decode(com[1]));
+                        System.out.println(sc.read(Integer.decode(com[1])));
                         break;
                     case "update" : sc.update(Integer.decode(com[1]), com[2]);
                         System.out.println("\nЗапись в файле обновлена");

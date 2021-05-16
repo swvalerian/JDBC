@@ -34,7 +34,6 @@ public class ServiceSkill implements ControllerIF {
 
     @Override
     public List<Skill> getAll() {
-        skillRepository.getAll().stream().forEach(s -> System.out.println(s.getId() + " : " +  s.getName()));
         return skillRepository.getAll();
     }
 }
