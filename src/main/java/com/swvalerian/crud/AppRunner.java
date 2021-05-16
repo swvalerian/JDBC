@@ -53,14 +53,7 @@ public class AppRunner {
         System.out.println(teamRep.getId(10l));*/
 
         // test4
-        /*System.out.println("\n проверим метод Update");
-        Team teamUpdate = new Team(10,"Extra", developerList);// неважно каким будет ID
-        developerList.remove(2);
-        developerList.remove(3);
 
-        teamRep.update(teamUpdate);
-
-        System.out.println(teamRep.getId(10l));*/
 
         /*
         // тест DevRepo
