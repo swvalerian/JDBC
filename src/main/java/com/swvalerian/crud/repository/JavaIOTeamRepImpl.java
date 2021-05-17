@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 // Team(id, name, List<Developer> developers)
 public class JavaIOTeamRepImpl implements TeamRepository{
-    //static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver"; // устарело. драйвер подгружается автоматом
     static private final String DATABASE_URL = "jdbc:mysql://localhost:3306/swvalerian";
     static private final String User = "root";
     static private final String Password = "QWERTgfdsa1980";
