@@ -15,11 +15,6 @@ import java.util.List;
 
 public class AppRunner {
     public static void main(String[] args) throws SQLException {
-
-        MainView mainView = new MainView();
-
-        mainView.showAll();
-
         /*JavaIOTeamRepImpl teamRep = new JavaIOTeamRepImpl();
 
         List<Team> teamList = teamRep.getAll();
@@ -31,47 +26,33 @@ public class AppRunner {
         }
 
         // test2
-        System.out.println("\nПроверим метод getId = 1 -> " + teamRep.getId(1l));
+        System.out.println("\nПроверим метод getId = 1 -> " + teamRep.getId(1l));*/
 
         // test3
-        System.out.println("\nПроверим метод save");
+//        System.out.println("\nПроверим метод save");
+//        List<Developer> developerList = new JavaIODevRepImpl().getAll();
+//        developerList.remove(1);
+//        developerList.remove(5);
+//        Team team = new Team(10,"TryCatch", developerList);// неважно каким будет ID
+//        teamRep.save(team);
 
-        List<Developer> developerList = new JavaIODevRepImpl().getAll();
-        developerList.remove(1);
-        developerList.remove(5);
+//      проверка метода удаления записи
+//      teamRep.deleteById(13l);
 
-
-        Team team = new Team(10,"Имя_команды", developerList);// неважно каким будет ID
-        // teamRep.save(team);
-        teamRep.deleteById(12l);
-*/
-        /*System.out.println(teamRep.getId(11l));
-
-        System.out.println("Проверим метод - удаление: ");
-        teamRep.deleteById(11l);
-
-        System.out.println(teamRep.getId(10l));*/
-
-        // test4
-
-
-        /*
         // тест DevRepo
-        DeveloperRepository devRep = new JavaIODevRepImpl();
-        System.out.println(devRep.getAll());
-        System.out.println(devRep.getId(9L));
-
-        SkillRepository skillRepository = new SkillRepository();
-        List<Skill> skillList = new ArrayList<>();
-        skillList.add(skillRepository.getById(20));
-
-        devRep.update(new Developer(4,"Pasha", "Sorokin", skillList)); // работает
-        System.out.println(devRep.getId(4l)); // работает
-
-        // devRep.save(new Developer(25, "Danil", "Markov", skillList)); // работает, неважно что в ID - т.к. автоинкремент! и я это учел!
-        // devRep.deleteById(10l); // работает
-        */
-
+//        DeveloperRepository devRep = new JavaIODevRepImpl();
+//        System.out.println(devRep.getAll());
+//        System.out.println(devRep.getId(20L));
+//
+//        SkillRepository skillRepository = new SkillRepository();
+//        List<Skill> skillList = new ArrayList<>();
+//        skillList.add(skillRepository.getById(20));
+//
+//        devRep.update(new Developer(17,"Pasha", "Sorokin", skillList)); // работает
+//        System.out.println(devRep.getId(17l)); // работает
+//
+//        // devRep.save(new Developer(25, "Danil", "Markov", skillList)); // работает, неважно что в ID - т.к. автоинкремент! и я это учел!
+//        devRep.deleteById(19l); // работает
 
         // тест SkillRepo
         /*SkillRepository skillRepository = new SkillRepository();
