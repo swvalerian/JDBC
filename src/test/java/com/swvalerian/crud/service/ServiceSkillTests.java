@@ -1,42 +1,60 @@
 package com.swvalerian.crud.service;
 
-import com.swvalerian.crud.service.ServiceSkill;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import com.swvalerian.crud.model.Skill;
 import org.junit.Test;
 
-//import static junit.framework.Assert.assertEquals;
+import org.mockito.Mockito;
+
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class ServiceSkillTests {
-    // мой первый Черный Ящик ( первый метод для написания теста )
-    //
-    // public Skill read(Integer id) {
-    //        return skillRepository.getById(id);
-    //    }
     ServiceSkill serviceSkillTest = new ServiceSkill();
+    ServiceSkill serviceSkillMock = Mockito.mock(ServiceSkill.class);
 
-    @Before
-    public void testStart() {
-        System.out.println("Запуск теста!");
-    }
+    @Test
+    public void shouldReadSkill() {
+        //ожидаемый возврат после запроса
+        String skillReadExpected = "Skill{id=1, name='Delphi'}";
+        //Второй вариант реализации теста: задаем то, что вернет затычка - ой, заглушка )))
+        Skill skillActual = new Skill(1, "Delphi");
 
-    @After
-    public void testEnd() {
-        System.out.println("Тест завершен успешно!");
+        Mockito.when(serviceSkillMock.read(1)).thenReturn(skillActual);
+        assertEquals(skillReadExpected, serviceSkillMock.read(1).toString());
+
+        /*// первый вариант
+        Mockito.when(serviceSkillMock.read(1)).thenReturn(serviceSkillTest.read(1));
+        assertEquals(skillReadExpected, serviceSkillMock.read(1).toString());
+        */
     }
 
     @Test
-    public void shouldCreateServiceSkill() {
-        Assert.assertNotNull(serviceSkillTest);
+    public void shouldGetAllSkill() {
+        List<Skill> skillListExpected = serviceSkillTest.getAll();
+
+        Mockito.when(serviceSkillMock.getAll()).thenReturn(skillListExpected);
+        assertEquals(skillListExpected, serviceSkillMock.getAll());
     }
 
     @Test
-    public void shouldReadFromDBSkill() {
-//        assertEquals("здесь я напишу то, что ожидаю получить от запроса","здесь будет запрос " +
-//                "который обратиться к МОКИТО, а МОКИТО уже будет эмулировать ответ от СУБД" );
-        assertEquals("Ожидаемое сообщение","Test", "Test");
+    public void shouldUpdateSkill() {
+        Skill skillUpdateExpected = new Skill(3, "Fortran");
+
+        Mockito.when(serviceSkillMock.update(3,"Fortran")).thenReturn(new Skill(3,"Fortran"));
+        assertEquals(skillUpdateExpected.toString(), serviceSkillMock.update(3,"Fortran").toString());
+    }
+
+    @Test
+    public void shouldCreateSkill() {
+        Skill skillCreateExpected = new Skill(10, "C#");
+
+        Mockito.when(serviceSkillMock.create(10,"C#")).thenReturn(new Skill(10,"C#"));
+        assertEquals(skillCreateExpected.toString(), serviceSkillMock.create(10,"C#").toString());
+    }
+
+    @Test
+    public void shouldDeleteSkill() {
+
     }
 }

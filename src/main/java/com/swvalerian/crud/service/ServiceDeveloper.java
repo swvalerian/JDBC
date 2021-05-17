@@ -13,7 +13,7 @@ public class ServiceDeveloper  {
 
     final private JavaIODevRepImpl devRep = new JavaIODevRepImpl();
 
-    public Developer create(Integer id, String firstName, String lastName) throws SQLException {
+    public Developer create(Integer id, String firstName, String lastName) {
         devRep.save(new Developer(id, firstName, lastName, new SkillRepository().getAll()));
         return new Developer(id, firstName, lastName, new SkillRepository().getAll());
     }
@@ -23,7 +23,7 @@ public class ServiceDeveloper  {
         return devRep.getId(id.longValue());
     }
 
-    public Developer update(Integer id, String firstName, String lastName) throws SQLException {
+    public Developer update(Integer id, String firstName, String lastName) {
         devRep.update(new Developer(id, firstName, lastName, new SkillRepository().getAll()));
         return new Developer(id, firstName, lastName, new SkillRepository().getAll());
     }
@@ -33,7 +33,7 @@ public class ServiceDeveloper  {
     }
 
     public List<Developer> getAll() {
-        devRep.getAll().stream().forEach(s -> System.out.println(s.getId() + " : " +  s.getFirstName() + ":" +s.getLastName() + "\n"));
+        // devRep.getAll().stream().forEach(s -> System.out.println(s.getId() + " : " +  s.getFirstName() + ":" +s.getLastName() + "\n"));
         return devRep.getAll();
     }
 }

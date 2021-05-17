@@ -41,7 +41,7 @@ public class AppRunner {
         developerList.remove(5);
 
 
-        Team team = new Team(10,"", developerList);// неважно каким будет ID
+        Team team = new Team(10,"Имя_команды", developerList);// неважно каким будет ID
         // teamRep.save(team);
         teamRep.deleteById(12l);
 */

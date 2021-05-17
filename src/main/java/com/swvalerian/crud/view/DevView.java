@@ -58,8 +58,6 @@ public class DevView {
             System.err.println("ошибка ввода - вывода. form DevView");
         } catch (IndexOutOfBoundsException ex) {
             System.err.println("Обращение к несуществующему элементу, введите команду верно!");
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

@@ -14,7 +14,7 @@ public class DevController {
     }
 
 
-    public Developer create(Integer id, String firstName, String lastName) throws SQLException {
+    public Developer create(Integer id, String firstName, String lastName) {
         serviceDeveloper.create(id, firstName, lastName);
         return serviceDeveloper.create(id, firstName, lastName);
     }
@@ -26,7 +26,7 @@ public class DevController {
     }
 
 
-    public Developer update(Integer id, String firstName, String lastName) throws SQLException {
+    public Developer update(Integer id, String firstName, String lastName) {
         serviceDeveloper.update(id, firstName, lastName);
         return serviceDeveloper.update(id, firstName, lastName);
     }

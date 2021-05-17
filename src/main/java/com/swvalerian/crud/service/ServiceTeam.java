@@ -29,7 +29,7 @@ public class ServiceTeam {
     }
 
     public List<Team> getAll() {
-        teamCon.getAll().stream().forEach(s -> System.out.println(s.getId() + " : " +  s.getName()));
+        // teamCon.getAll().stream().forEach(s -> System.out.println(s.getId() + " : " +  s.getName()));
         return teamCon.getAll();
     }
 }
